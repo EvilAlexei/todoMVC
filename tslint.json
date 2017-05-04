@@ -1,4 +1,5 @@
 {
+  "extends": "tslint-config-valorsoft",
   "rulesDirectory": [
     "node_modules/codelyzer"
   ],
@@ -111,6 +112,9 @@
     "directive-class-suffix": true,
     "no-access-missing-member": true,
     "templates-use-public": true,
-    "invoke-injectable": true
+    "invoke-injectable": true,
+    "directive-selector-prefix": [true, "tdmvc"],
+    "component-selector-prefix": [true, "tdmvc"],
+    "pipe-naming": [true, "camelCase", "tdmvc"]
   }
 }

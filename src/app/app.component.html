@@ -1,3 +1,44 @@
-<h1>
-  {{title}}
-</h1>
+<section class="todoapp">
+  <header class="header">
+    <h1>Todos</h1>
+    <form
+      action=""
+      id="todo-form"
+      (ngSubmit)="addTodo()">
+      <input
+        class="new-todo"
+        placeholder="What needs to be done?"
+        name="todoText"
+        [(ngModel)]="todoText">
+    </form>
+  </header>
+  <section class="main">
+    <input class="toggle-all" type="checkbox">
+    <ul class="todo-list">
+      <li *ngFor="let item of items; let num = index">
+        <div class="view">
+          <input class="toggle" type="checkbox" id="item-{{ num }}">
+          <label for="item-{{ num }}">{{ item.text }}</label>
+          <button class="destroy"></button>
+        </div>
+      </li>
+    </ul>
+  </section>
+  <footer id="footer" ng-show="todos.length" class="">
+    <span class="todo-count"><strong class="ng-binding">0</strong>
+      <span>items left</span>
+    </span>
+    <ul class="filters">
+      <li>
+        <a href="#/" class="selected">All</a>
+      </li>
+      <li>
+        <a href="#/active">Active</a>
+      </li>
+      <li>
+        <a href="#/completed">Completed</a>
+      </li>
+    </ul>
+    <button class="clear-completed" ng-click="clearCompletedTodos()" ng-show="completedCount">Clear completed</button>
+  </footer>
+</section>
