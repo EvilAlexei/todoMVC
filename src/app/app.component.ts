@@ -7,8 +7,16 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   todoText: string;
+  store: string[];
+
+  constructor() {
+    this.store = [];
+  }
 
   addTodo() {
-    console.log(this.todoText);
+    if (this.todoText.length > 0) {
+      this.store.push(this.todoText);
+      this.todoText = '';
+    }
   }
 }

@@ -15,16 +15,16 @@
   <section class="main">
     <input class="toggle-all" type="checkbox">
     <ul class="todo-list">
-      <li *ngFor="let item of items; let num = index">
+      <li *ngFor="let item of store; let num = index">
         <div class="view">
           <input class="toggle" type="checkbox" id="item-{{ num }}">
-          <label for="item-{{ num }}">{{ item.text }}</label>
+          <label for="item-{{ num }}">{{ item }}</label>
           <button class="destroy"></button>
         </div>
       </li>
     </ul>
   </section>
-  <footer id="footer" ng-show="todos.length" class="">
+  <footer id="footer" *ngIf="store.length > 0" class="">
     <span class="todo-count"><strong class="ng-binding">0</strong>
       <span>items left</span>
     </span>
@@ -39,6 +39,6 @@
         <a href="#/completed">Completed</a>
       </li>
     </ul>
-    <button class="clear-completed" ng-click="clearCompletedTodos()" ng-show="completedCount">Clear completed</button>
+    <button class="clear-completed">Clear completed</button>
   </footer>
 </section>
