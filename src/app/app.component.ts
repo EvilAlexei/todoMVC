@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 
+import { Store } from './services/store';
+import { Todo } from './todo.model';
+
 @Component({
   selector: 'todo-app',
   templateUrl: './app.component.html',
@@ -7,16 +10,25 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   todoText: string;
-  store: string[];
+  store: Store;
 
-  constructor() {
-    this.store = [];
+  constructor(store: Store) {
+    this.store = store;
   }
 
   addTodo() {
     if (this.todoText.length > 0) {
-      this.store.push(this.todoText);
+      this.store.add(this.todoText);
       this.todoText = '';
     }
+  }
+
+  remove(todo: Todo) {
+    this.store.remove(todo);
+  }
+
+  toggleStatus(todo: Todo) {
+    console.log('22');
+    //todo.completed = !todo.completed;
   }
 }

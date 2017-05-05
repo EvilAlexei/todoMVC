@@ -344,6 +344,7 @@ label[for='toggle-all'] {
   display: block;
   line-height: 1.2;
   transition: color 0.4s;
+  cursor: pointer;
 }
 
 .todo-list li.completed label {

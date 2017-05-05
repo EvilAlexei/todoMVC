@@ -5,8 +5,10 @@
       action=""
       id="todo-form"
       (ngSubmit)="addTodo()">
+      <!-- TODO: remove autocomplete -->
       <input
         class="new-todo"
+        autocomplete="off"
         placeholder="What needs to be done?"
         name="todoText"
         [(ngModel)]="todoText">
@@ -15,18 +17,18 @@
   <section class="main">
     <input class="toggle-all" type="checkbox">
     <ul class="todo-list">
-      <li *ngFor="let item of store; let num = index">
+      <li *ngFor="let item of store.todoItems; let num = index">
         <div class="view">
-          <input class="toggle" type="checkbox" id="item-{{ num }}">
-          <label for="item-{{ num }}">{{ item }}</label>
-          <button class="destroy"></button>
+          <input class="toggle" (click)="toggleStatus(item)" type="checkbox" id="item-{{ num }}" [checked]="item.completed">
+          <label for="item-{{ num }}">{{ item.title }}</label>
+          <button class="destroy" (click)="remove(item)"></button>
         </div>
       </li>
     </ul>
   </section>
-  <footer id="footer" *ngIf="store.length > 0" class="">
-    <span class="todo-count"><strong class="ng-binding">0</strong>
-      <span>items left</span>
+  <footer id="footer" *ngIf="store.todoItems.length > 0" class="">
+    <span class="todo-count"><strong class="ng-binding">{{ store.getRemaining().length }}</strong>
+      <span>{{store.getRemaining().length === 1 ? 'item' : 'items'}} left</span>
     </span>
     <ul class="filters">
       <li>
