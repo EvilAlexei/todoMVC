@@ -22,7 +22,7 @@
       [checked]="store.allCompleted()"
       (click)="toggleAllTodos(toggleall.checked)">
     <ul class="todo-list">
-      <li *ngFor="let item of store.todoItems; let num = index">
+      <li *ngFor="let item of storeItems; let num = index">
         <div class="view">
           <input class="toggle" (click)="toggleStatus(item)" type="checkbox" id="item-{{ num }}" [checked]="item.completed">
           <label for="item-{{ num }}">{{ item.title }}</label>
@@ -36,9 +36,9 @@
       <span>{{store.getRemaining().length === 1 ? 'item' : 'items'}} left</span>
     </span>
     <ul class="filters">
-      <li><a href="#/" class="selected">All</a></li>
-      <li><a href="#/active">Active</a></li>
-      <li><a href="#/completed">Completed</a></li>
+      <li *ngFor="let filter of filters;">
+        <a href="#/" (click)="todosFilter(filter)" [class.selected]="filter.selected">{{filter.type}}</a>
+      </li>
     </ul>
   </footer>
 </section>

@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 
 import { Store } from './services/store';
-import { Todo } from './todo.model';
+import { Todo } from './models/todo.model';
+import { Filter } from './models/filter.model';
 
 @Component({
   selector: 'todo-app',
@@ -9,11 +10,19 @@ import { Todo } from './todo.model';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  todoText: string;
   store: Store;
+  storeItems: Todo[];
+  todoText: string;
+  filters: Filter[];
 
   constructor(store: Store) {
     this.store = store;
+    this.storeItems = store.todoItems;
+    this.filters = [
+      {type: 'All', selected: true},
+      {type: 'Active', selected: false},
+      {type: 'Completed', selected: false}
+    ];
   }
 
   addTodo() {
@@ -33,5 +42,11 @@ export class AppComponent {
 
   toggleAllTodos(completedStatus) {
     this.store.toggleAllTodos(completedStatus);
+  }
+
+  todosFilter(filter) {
+    this.filters.forEach((filter: Filter) => filter.selected = false);
+    filter.selected = true;
+    this.storeItems = this.store.todosFilter(filter.type);;
   }
 }
