@@ -28,7 +28,10 @@ export class AppComponent {
   }
 
   toggleStatus(todo: Todo) {
-    console.log('22');
-    //todo.completed = !todo.completed;
+    this.store.toggleTodoStatus(todo);
+  }
+
+  toggleAllTodos(completedStatus) {
+    this.store.toggleAllTodos(completedStatus);
   }
 }

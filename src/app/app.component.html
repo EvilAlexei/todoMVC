@@ -15,7 +15,12 @@
     </form>
   </header>
   <section class="main">
-    <input class="toggle-all" type="checkbox">
+    <input 
+      class="toggle-all"
+      type="checkbox"
+      #toggleall
+      [checked]="store.allCompleted()"
+      (click)="toggleAllTodos(toggleall.checked)">
     <ul class="todo-list">
       <li *ngFor="let item of store.todoItems; let num = index">
         <div class="view">
@@ -31,16 +36,9 @@
       <span>{{store.getRemaining().length === 1 ? 'item' : 'items'}} left</span>
     </span>
     <ul class="filters">
-      <li>
-        <a href="#/" class="selected">All</a>
-      </li>
-      <li>
-        <a href="#/active">Active</a>
-      </li>
-      <li>
-        <a href="#/completed">Completed</a>
-      </li>
+      <li><a href="#/" class="selected">All</a></li>
+      <li><a href="#/active">Active</a></li>
+      <li><a href="#/completed">Completed</a></li>
     </ul>
-    <button class="clear-completed">Clear completed</button>
   </footer>
 </section>
