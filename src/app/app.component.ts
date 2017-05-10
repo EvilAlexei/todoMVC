@@ -37,7 +37,6 @@ export class AppComponent {
 
   remove(todo: Todo) {
     this.store.remove(todo);
-    this.storeItems = this.store.todosFilter(this.filterType);
   }
 
   toggleStatus(todo: Todo) {
@@ -51,10 +50,10 @@ export class AppComponent {
   }
 
   todosFilter(filter) {
-    this.filters.forEach((el: Filter) => {
-      (el.type === filter.type) ? el.selected = true : el.selected = false;
-    });
     if (filter.type !== this.filterType) {
+      this.filters.forEach((el: Filter) => {
+        (el.type === filter.type) ? el.selected = true : el.selected = false;
+      });
       this.filterType = filter.type;
       this.storeItems = this.store.todosFilter(this.filterType);
     }
