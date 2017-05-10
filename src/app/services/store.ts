@@ -22,7 +22,7 @@ export class Store {
   remove(todo: Todo) {
     this.todoItems.splice(this.todoItems.indexOf(todo), 1);
   }
-  
+
   allCompleted() {
     return this.todoItems.length === this.getByCompletedStatus(true).length;
   }
@@ -42,11 +42,11 @@ export class Store {
   }
 
   todosFilter(filter) {
-    switch(filter){
+    switch (filter) {
       case 'Completed':
-        return this.todoItems.filter((todo: Todo) => todo.completed ? todo : false)
+        return this.todoItems.filter((todo: Todo) => todo.completed ? todo : false);
       case 'Active':
-        return this.todoItems.filter((todo: Todo) => todo.completed ? false : todo)
+        return this.todoItems.filter((todo: Todo) => todo.completed ? false : todo);
       case 'All':
       default:
         return this.todoItems;
