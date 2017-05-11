@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { StoreMock } from './mocks/store.mock';
 import { Store } from './services/store';
 
-fdescribe('AppComponent', () => {
+describe('AppComponent', () => {
   let component: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
 
