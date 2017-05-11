@@ -3,7 +3,7 @@ export class Todo {
   completed: boolean;
 
   constructor(title: string) {
-    this.completed = false;
     this.title = title.trim();
+    this.completed = false;
   }
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { Store } from './services/store';
 import { Todo } from './models/todo.model';
@@ -9,7 +9,7 @@ import { Filter } from './models/filter.model';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   store: Store;
   storeItems: Todo[];
   todoText: string;
@@ -18,7 +18,7 @@ export class AppComponent {
 
   constructor(store: Store) {
     this.store = store;
-    this.storeItems = store.todoItems;
+    this.storeItems = [];
     this.filters = [
       {type: 'All', selected: true},
       {type: 'Active', selected: false},
@@ -57,5 +57,19 @@ export class AppComponent {
       this.filterType = filter.type;
       this.storeItems = this.store.todosFilter(this.filterType);
     }
+  }
+
+  updateStore() {
+    const exampleData = [
+      {title: 'Test item 1', completed: false},
+      {title: 'Test item 2', completed: true},
+      {title: 'Test item 3', completed: false}
+    ];
+    this.store.todoItems = exampleData;
+    this.storeItems = this.store.todoItems;
+  }
+
+  ngOnInit() {
+    this.updateStore();
   }
 }

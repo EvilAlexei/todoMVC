@@ -2,8 +2,8 @@ export class Filter {
   type: string;
   selected: boolean;
 
-  constructor(title: string) {
-    this.type = title.trim();
+  constructor(type: string) {
+    this.type = type.trim();
     this.selected = false;
   }
 }

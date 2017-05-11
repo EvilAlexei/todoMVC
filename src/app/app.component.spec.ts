@@ -1,32 +1,80 @@
-import { TestBed, async } from '@angular/core/testing';
+import { TestBed, ComponentFixture } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
+import { StoreMock } from './mocks/store.mock';
+import { Store } from './services/store';
 
-describe('AppComponent', () => {
-  beforeEach(async(() => {
+fdescribe('AppComponent', () => {
+  let component: AppComponent;
+  let fixture: ComponentFixture<AppComponent>;
+
+  beforeEach((() => {
     TestBed.configureTestingModule({
-      declarations: [
-        AppComponent
+      declarations: [AppComponent],
+      imports: [FormsModule],
+      providers: [
+        { provide: Store, useClass: StoreMock }
       ]
-    }).compileComponents();
+    });
+
+    fixture = TestBed.createComponent(AppComponent);
+    component = fixture.componentInstance;
   }));
 
-  it('should create the app', async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app).toBeTruthy();
-  }));
+  it('should create the app', () => {
+    expect(component).toBeDefined();
+  });
 
-  it(`should have as title 'app works!'`, async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('app works!');
-  }));
+  it('should add new item', () => {
+    component.todoText = 'Test';
+    component.addTodo();
 
-  it('should render title in a h1 tag', async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('app works!');
-  }));
+    expect(component.todoText).toEqual('');
+  });
+
+  it('should do nothing on new item with empty text', () => {
+    component.todoText = '';
+    component.addTodo();
+  });
+
+  it('should remove specific item', () => {
+    component.updateStore();
+    const todo = component.store.todoItems[0];
+
+    component.remove(todo);
+  });
+
+  it('should toggleStatus todo status', () => {
+    component.updateStore();
+    const todo = component.store.todoItems[0];
+
+    component.toggleStatus(todo);
+  });
+
+  it('should toggle all items', () => {
+    const status = true;
+
+    component.toggleAllTodos(status);
+  });
+
+  it('should filter items', () => {
+    const filter = {type: 'Completed', selected: false};
+
+    component.todosFilter(filter);
+  });
+
+  it('should do nothing on filter type', () => {
+    const filter = {type: component.filterType, selected: false};
+
+    component.todosFilter(filter);
+  });
+
+  it('should update store', () => {
+    component.updateStore();
+  });
+
+  it('should update store on init', () => {
+    component.ngOnInit();
+  });
 });

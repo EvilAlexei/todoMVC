@@ -2,17 +2,12 @@ import { Injectable } from '@angular/core';
 
 import { Todo } from '../models/todo.model';
 
-const exampleData = [
-      {title: 'Test item 1', completed: false},
-      {title: 'Test item 2', completed: false}
-    ];
-
 @Injectable()
 export class Store {
   todoItems: Todo[];
 
   constructor() {
-    this.todoItems = exampleData;
+    this.todoItems = [];
   }
 
   add(title: string) {
@@ -24,7 +19,11 @@ export class Store {
   }
 
   allCompleted() {
-    return this.todoItems.length === this.getByCompletedStatus(true).length;
+    if (this.todoItems.length > 0) {
+      return this.todoItems.length === this.getByCompletedStatus(true).length;
+    }
+
+    return false;
   }
 
   getRemaining() {
@@ -37,7 +36,7 @@ export class Store {
 
   toggleAllTodos(completedStatus) {
     this.todoItems.forEach((todo: Todo) => {
-      todo.completed = completedStatus;
+      todo.completed = !!completedStatus;
     });
   }
 

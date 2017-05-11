@@ -31,12 +31,12 @@
     </ul>
   </section>
   <footer id="footer" *ngIf="store.todoItems.length > 0" class="">
-    <span class="todo-count"><strong class="ng-binding">{{ store.getRemaining().length }}</strong>
+    <span class="todo-count"><strong>{{ store.getRemaining().length }}</strong>
       <span>{{store.getRemaining().length === 1 ? 'item' : 'items'}} left</span>
     </span>
     <ul class="filters">
       <li *ngFor="let filter of filters;">
-        <a href="#/" (click)="todosFilter(filter)" [class.selected]="filter.selected">{{filter.type}}</a>
+        <a href="#" (click)="todosFilter(filter)" [class.selected]="filter.selected">{{filter.type}}</a>
       </li>
     </ul>
   </footer>
