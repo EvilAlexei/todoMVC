@@ -9,7 +9,7 @@ describe('AppComponent', () => {
   let component: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
 
-  beforeEach((() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [AppComponent],
       imports: [FormsModule],
@@ -20,7 +20,7 @@ describe('AppComponent', () => {
 
     fixture = TestBed.createComponent(AppComponent);
     component = fixture.componentInstance;
-  }));
+  });
 
   it('should create the app', () => {
     expect(component).toBeDefined();
